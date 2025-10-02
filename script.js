@@ -15,6 +15,38 @@ function ensureButtonExists() {
 
     button.classList.add("modern-button");
 
+    // Erstelle Tooltip
+    const tooltip = document.createElement("span");
+    tooltip.classList.add("tooltip");
+    tooltip.textContent = "Click to close Sidenav";
+    button.appendChild(tooltip);
+
+    // Tooltip CSS Styling
+    const tooltipStyle = document.createElement("style");
+    tooltipStyle.textContent = `
+      .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 120%; /* Tooltip erscheint unterhalb des Buttons */
+        left: 145%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .modern-button:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    `;
+    document.head.appendChild(tooltipStyle);
+
     // Hover-Animation
     button.addEventListener("mouseover", () => {
       button.style.backgroundColor = "#0056b3";
@@ -34,11 +66,16 @@ function ensureButtonExists() {
       const computedDisplay = window.getComputedStyle(leftNavPanel).display;
 
       if (computedDisplay === "flex") {
+        button.title = "Open Sidenav"; // Tooltip anpassen
+        tooltip.textContent = "Click to open Sidenav";
+
         leftNavPanel.style.display = "none";
         rightWhiteSpace.style.maxWidth = "100%";
 
         console.log("Second Move: Ist bereits flex");
       } else {
+        button.title = "Close Sidenav"; // Tooltip anpassen
+        tooltip.textContent = "Click to close Sidenav";
         leftNavPanel.style.display = "flex";
         rightWhiteSpace.style.maxWidth = "70%";
         console.log("First Move: War nicht flex");
