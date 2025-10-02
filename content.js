@@ -95,31 +95,41 @@ setInterval(ensureButtonExists, 1000); // Alle 1000ms (1 Sekunde) überprüfen
 
 /* Fullscreen Change Functionality */
 
-// 1. Das erste <header>-Element auswählen
-const headerElement = document.querySelector("header");
+window.addEventListener("load", () => {
+  // Entferne das <header>-Element, falls vorhanden
+  const headerElement = document.querySelector("header");
+  if (headerElement) {
+    headerElement.remove();
+    console.log("Das <header>-Element wurde entfernt.");
+  } else {
+    console.log("Kein <header>-Element gefunden.");
+  }
 
-// 2. Prüfen, ob das Element existiert, und es dann entfernen
-if (headerElement) {
-  headerElement.remove();
-  console.log("Das <header>-Element wurde entfernt.");
-} else {
-  console.log("Kein <header>-Element gefunden.");
-}
+  // Entferne das <footer>-Element, falls vorhanden
+  const footerElement = document.querySelector("footer");
+  if (footerElement) {
+    footerElement.remove();
+    console.log("Das <footer>-Element wurde entfernt.");
+  } else {
+    console.log("Kein <footer>-Element gefunden.");
+  }
 
-// 1. Das erste <header>-Element auswählen
-const footerElement = document.querySelector("footer");
+  // CSS-Attribute nur ändern, wenn die Elemente existieren
+  const mainWrapperWide = document.querySelector("#main-wrapper.wide");
+  if (mainWrapperWide) {
+    mainWrapperWide.style.maxWidth = "";
+    mainWrapperWide.style.maxHeight = "";
+    console.log("MaxWidth und MaxHeight entfernt von #main-wrapper.wide");
+  } else {
+    console.log("#main-wrapper.wide nicht gefunden.");
+  }
 
-// 2. Prüfen, ob das Element existiert, und es dann entfernen
-if (footerElement) {
-  footerElement.remove();
-  console.log("Das <footer>-Element wurde entfernt.");
-} else {
-  console.log("Kein <footer>-Element gefunden.");
-}
-
-// Attribut rauskicken aus dem css
-document.querySelector("#main-wrapper.wide").style.maxWidth = "";
-document.querySelector("#main-wrapper.wide").style.maxHeight = "";
-
-document.getElementById("main-wrapper").style.minWidth = "100%";
-document.getElementById("main-wrapper").style.minHeight = "100%";
+  const mainWrapper = document.getElementById("main-wrapper");
+  if (mainWrapper) {
+    mainWrapper.style.minWidth = "100%";
+    mainWrapper.style.minHeight = "100%";
+    console.log("MinWidth und MinHeight auf 100% gesetzt für #main-wrapper");
+  } else {
+    console.log("#main-wrapper nicht gefunden.");
+  }
+});
