@@ -90,8 +90,50 @@ function ensureButtonExists() {
     }
   }
 }
+
+function adaptiveInputField() {
+  // Zugriff auf das Parent-Div
+  const parentDiv = document.getElementById("composeDiv")?.parentElement;
+  if (parentDiv) {
+    // Hochprofessionelles Styling per JS
+    Object.assign(parentDiv.style, {
+      padding: "24px",
+      borderRadius: "16px",
+      border: "2px solid #e0e0e5",
+      background: "linear-gradient(145deg, #ffffff, #f9f9fc)",
+      boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+      transition: "all 0.4s ease",
+      maxWidth: "800px",
+      margin: "20px auto",
+      display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    });
+
+    // Interaktive Animationen
+    parentDiv.addEventListener("mouseenter", () => {
+      parentDiv.style.transform = "scale(1.02)";
+      parentDiv.style.boxShadow = "0 12px 35px rgba(0,0,0,0.15)";
+    });
+
+    parentDiv.addEventListener("mouseleave", () => {
+      parentDiv.style.transform = "scale(1)";
+      parentDiv.style.boxShadow = "0 8px 25px rgba(0,0,0,0.1)";
+    });
+
+    parentDiv.addEventListener("mousedown", () => {
+      parentDiv.style.transform = "scale(0.98)";
+    });
+
+    parentDiv.addEventListener("mouseup", () => {
+      parentDiv.style.transform = "scale(1.02)";
+    });
+  }
+}
 // Überprüfe regelmäßig, ob der Button existiert, und füge ihn hinzu, wenn er noch nicht vorhanden ist
 setInterval(ensureButtonExists, 1000); // Alle 1000ms (1 Sekunde) überprüfen
+setInterval(adaptiveInputField, 1000); // Alle 1000ms (1 Sekunde) überprüfen
 
 /* Fullscreen Change Functionality */
 
