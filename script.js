@@ -26,31 +26,56 @@ button.addEventListener("mouseout", () => {
 
 // Klick-Event für sofortige DOM-Änderung
 button.addEventListener("click", () => {
-  // 1. Hole das Element
-  const leftNavPanel = document.getElementById("navigation"); // Annahme: Du hast leftNavPanel so definiert
+  const leftNavPanel = document.getElementById("navigation");
 
-  // 2. Rufe den berechneten Stil ab (Computed Style)
   const computedDisplay = window.getComputedStyle(leftNavPanel).display;
 
-  // 3. Prüfe den berechneten Wert
   if (computedDisplay === "flex") {
-    // Zustand A: Ist "flex" (oder wird als "flex" angezeigt)
-
-    // ACHTUNG: Hier setzt du es wieder auf "flex" und triggerst den "else"-Block nie
-    // Wenn du den Wert umschalten möchtest, siehe den Tipp unten.
     leftNavPanel.style.display = "none";
     rightWhiteSpace.style.maxWidth = "100%";
 
     console.log("Second Move: Ist bereits flex");
   } else {
-    // Zum Testen des aktuellen Zustands:
-    leftNavPanel.style.display = "flex"; // Dies ändert nichts, wenn es schon "flex" ist
+    leftNavPanel.style.display = "flex";
     rightWhiteSpace.style.maxWidth = "70%";
-    // Zustand B: Ist etwas anderes als "flex" (z.B. "none", "block", "")
     console.log("First Move: War nicht flex");
   }
 });
 
 // Füge den Button als erstes Kind des conversation-header hinzu
 const header = document.getElementById("conversation-header");
-header.insertBefore(button, header.firstChild);
+if(header){
+    // Opened a chat mode
+    header.insertBefore(button, header.firstChild);
+}
+
+/* Fullscreen Change Functionality */
+
+// 1. Das erste <header>-Element auswählen
+const headerElement = document.querySelector('header');
+
+// 2. Prüfen, ob das Element existiert, und es dann entfernen
+if (headerElement) {
+    headerElement.remove();
+    console.log("Das <header>-Element wurde entfernt.");
+} else {
+    console.log("Kein <header>-Element gefunden.");
+}
+
+// 1. Das erste <header>-Element auswählen
+const footerElement = document.querySelector('footer');
+
+// 2. Prüfen, ob das Element existiert, und es dann entfernen
+if (footerElement) {
+    footerElement.remove();
+    console.log("Das <header>-Element wurde entfernt.");
+} else {
+    console.log("Kein <header>-Element gefunden.");
+}
+
+// Attribut rauskicken aus dem css
+document.querySelector("#main-wrapper.wide").style.maxWidth = ""; 
+document.querySelector("#main-wrapper.wide").style.maxHeight = "";
+
+document.getElementById("main-wrapper").style.minWidth ="100%";
+document.getElementById("main-wrapper").style.minHeight ="100%";
