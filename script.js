@@ -26,15 +26,28 @@ button.addEventListener("mouseout", () => {
 
 // Klick-Event für sofortige DOM-Änderung
 button.addEventListener("click", () => {
-  if (leftNavPanel.style.display == "flex") {
-    leftNavPanel.style.display = "flex";
-    rightWhiteSpace.style.maxWidth = "70%";
-    console.log("Second Move");
-  } else {
-    // Scheiteret aber immer am first move weil er display flex im leftNavPanel nicht korrekt abfragen kann
+  // 1. Hole das Element
+  const leftNavPanel = document.getElementById("navigation"); // Annahme: Du hast leftNavPanel so definiert
+
+  // 2. Rufe den berechneten Stil ab (Computed Style)
+  const computedDisplay = window.getComputedStyle(leftNavPanel).display;
+
+  // 3. Prüfe den berechneten Wert
+  if (computedDisplay === "flex") {
+    // Zustand A: Ist "flex" (oder wird als "flex" angezeigt)
+
+    // ACHTUNG: Hier setzt du es wieder auf "flex" und triggerst den "else"-Block nie
+    // Wenn du den Wert umschalten möchtest, siehe den Tipp unten.
     leftNavPanel.style.display = "none";
     rightWhiteSpace.style.maxWidth = "100%";
-    console.log("First Move");
+
+    console.log("Second Move: Ist bereits flex");
+  } else {
+    // Zum Testen des aktuellen Zustands:
+    leftNavPanel.style.display = "flex"; // Dies ändert nichts, wenn es schon "flex" ist
+    rightWhiteSpace.style.maxWidth = "70%";
+    // Zustand B: Ist etwas anderes als "flex" (z.B. "none", "block", "")
+    console.log("First Move: War nicht flex");
   }
 });
 
