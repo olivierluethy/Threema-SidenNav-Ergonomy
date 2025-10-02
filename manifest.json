@@ -2,22 +2,18 @@
   "manifest_version": 3,
   "name": "Threema Burger Menu Button",
   "version": "1.0",
-  "description": "Ein Button, um das Layout auf web.threema.com zu steuern",
-  "permissions": [
-    "activeTab"
-  ],
+  "description": "Ein Button, um das Layout auf web.threema.com zu steuern!",
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
-      "matches": ["https://web.threema.com/*"],
+      "matches": ["https://web.threema.com/*", "https://web.threema.ch/*"],
       "js": ["content.js"]
     }
   ],
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": [
-    "https://web.threema.com/*"
-  ],
+  "host_permissions": ["https://web.threema.com/*", "https://web.threema.ch/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

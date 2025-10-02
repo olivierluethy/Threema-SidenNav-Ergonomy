@@ -1,3 +1,3 @@
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("Burger Menu Extension Installed!");
+  console.log("Threema Extension is active!");
 });

@@ -92,6 +92,11 @@ function ensureButtonExists() {
 }
 
 function adaptiveInputField() {
+  const inputField = document.getElementById("composeDiv");
+  Object.assign(inputField.style, {
+    maxHeight: "",
+    height: "100%",
+  });
   // Zugriff auf das Parent-Div
   const parentDiv = document.getElementById("composeDiv")?.parentElement;
   if (parentDiv) {
@@ -107,7 +112,11 @@ function adaptiveInputField() {
       margin: "20px auto",
       display: "flex",
       flexDirection: "column",
+      zIndex: "100",
       gap: "12px",
+      position: "relative", // wichtig für Top-Verschiebung
+      //top: "-200px", // Für die Verschiebung nach oben
+      //height: "200px", // Für die Vergrösserung der Höhe
       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     });
 
@@ -128,6 +137,27 @@ function adaptiveInputField() {
 
     parentDiv.addEventListener("mouseup", () => {
       parentDiv.style.transform = "scale(1.02)";
+    });
+
+    inputField.addEventListener("input", function () {
+      let text = inputField.textContent;
+      if (text.length == 142) {
+        parentDiv.style.top = "-15px";
+        parentDiv.style.height = "70px";
+        console.log("first line");
+      } else if (text.length == 297) {
+        parentDiv.style.top = "-30px";
+        parentDiv.style.height = "90px";
+        console.log("second line");
+      } else if (text.length == "451") {
+        parentDiv.style.top = "-50px";
+        parentDiv.style.height = "120px";
+        console.log("third line");
+      } else if (text.length == "624") {
+        parentDiv.style.top = "-70px";
+        parentDiv.style.height = "130px";
+        console.log("fourth line");
+      }
     });
   }
 }
